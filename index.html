@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>!!Con Syncwatch</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>!!Con Syncwatch</h1>
+    <div id="total-points">Total Points: 0 / 11</div>
+    <div id="cards-container" class="cards-container"></div>
+    
+    <form
+      name="submit"
+      action="success.html"
+      method="POST"
+      data-netlify="true"
+    >
+        <button id="submit-btn" disabled>Submit Votes</button>
+        <input type="hidden" name="data" id="submit-data" />
+    </form>
+
+    
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p id="modal-description"></p>
+        </div>
+    </div>
+
+    <script src=/script.js></script>
+</body>
+</html>
