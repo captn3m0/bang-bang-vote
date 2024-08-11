@@ -25,8 +25,7 @@ function createCard(talk) {
     card.className = 'card';
     card.innerHTML = `
         <h2>${talk.title}</h2>
-        <p>Speaker: ${talk.speaker}</p>
-        <p class="description">${truncateText(talk.description, 100)}</p>
+        <p class="description">${truncateText(talk.description, 300)}</p>
         <button class="expand-btn">Read More</button>
         <button class="downvote-btn">-</button>
         <button class="upvote-btn">+</button>
@@ -35,6 +34,9 @@ function createCard(talk) {
 
     const expandBtn = card.querySelector('.expand-btn');
     expandBtn.addEventListener('click', () => showModal(talk));
+    document.getElementById('modal').addEventListener('click', ()=>{
+        document.getElementById('modal').style.display = 'none';
+    });
 
     const upvoteBtn = card.querySelector('.upvote-btn');
     const pointsSpan = card.querySelector('.points');
