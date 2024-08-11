@@ -5,11 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>!!Con Syncwatch</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        .add-to-calendar::part(atcb-button-wrapper), .calendar-wrapper {
+            margin: 50px auto 0 auto;
+            width: 200px;
+          }
+    </style>
 </head>
 <body>
     <h1>!!Con Syncwatch</h1>
     
+    <div style="text-align: center;">
     Thank you for submitting your talk preferences. We will use this to decide
-    which talks to screen for the Syncwatch.
+    which talks to screen for the Syncwatch. Remember to add the event to your calendar.
+
+    <div class="calendar-wrapper">
+        <add-to-calendar-button 
+          style="text-align: center;"
+          name="!!Con Synwatch"
+          description="Bang Bang Con Syncwatch Party"
+          startDate="2024-08-26"
+          endDate="2024-08-26"
+          timeZone="Asia/Kolkata"
+          location="Underline Center, Bangalore"
+          organizer="Karthik, Nemo, and Unnati|karthik@underline.center"
+          options="'Apple','Google','iCal','Outlook.com','Yahoo','Microsoft365','MicrosoftTeams'"
+        ></add-to-calendar-button>
+    </div>
+    
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
 </body>
 </html>
