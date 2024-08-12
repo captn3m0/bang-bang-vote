@@ -9,9 +9,9 @@ function shuffleArray(array) {
     }
 }
 
-function truncateText(text, maxLength) {
-    if (text.length <= maxLength) return text;
-    return text.substr(0, maxLength) + '...';
+function truncateText(text, extraText, maxLength) {
+    if (text.length + extraText.length <= maxLength) return text;
+    return text.substr(0, maxLength - extraText.length ) + '...';
 }
 
 function updateTotalPoints() {
@@ -24,7 +24,7 @@ function createCard(talk) {
     card.className = 'card';
     card.innerHTML = `
         <h2>${talk.title}</h2>
-        <p class="description">${truncateText(talk.description, 300)}</p>
+        <p class="description">${truncateText(talk.description, talk.title, 300)}</p>
         <button class="expand-btn">Read More</button>
         <button class="downvote-btn">-</button>
         <button class="upvote-btn">+</button>
