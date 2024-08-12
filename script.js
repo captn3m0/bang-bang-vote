@@ -15,7 +15,6 @@ function truncateText(text, maxLength) {
 }
 
 function updateTotalPoints() {
-    document.getElementById('total-points').textContent = `Total Points: ${totalPoints} / ${maxPoints}`;
     document.getElementById('submit-btn').disabled = totalPoints !== maxPoints;
     document.getElementById('submit-data').value = getSubmitData();
 }
@@ -43,20 +42,27 @@ function createCard(talk) {
     upvoteBtn.addEventListener('click', () => {
         if (totalPoints < maxPoints) {
             totalPoints++;
-            pointsSpan.textContent = parseInt(pointsSpan.textContent) + 1;
+            const currentPoints = parseInt(pointsSpan.textContent) + 1;
+            pointsSpan.textContent = currentPoints;
             updateTotalPoints();
+            updatePointsLeft();
+            if (currentPoints > 0) {
+                card.classList.add('voted');
+            }
         }
     });
 
     const downvoteBtn = card.querySelector('.downvote-btn');
     downvoteBtn.addEventListener('click', () => {
         if (parseInt(pointsSpan.textContent) == 0) {
+            card.classList.remove('voted');
             return;
         }
         if (totalPoints > 0) {
             totalPoints--;
             pointsSpan.textContent = parseInt(pointsSpan.textContent) - 1;
             updateTotalPoints();
+            updatePointsLeft();
         }
     });
 
@@ -65,11 +71,9 @@ function createCard(talk) {
 
 function showModal(talk) {
     const modal = document.getElementById('modal');
-    const modalTitle = document.getElementById('modal-title');
     const modalDescription = document.getElementById('modal-description');
     const closeBtn = document.querySelector('.close');
 
-    modalTitle.textContent = talk.title;
     modalDescription.textContent = talk.description;
     modal.style.display = 'block';
 
@@ -104,4 +108,42 @@ fetch('/talks.json')
         });
     });
 
-document.getElementById('submit-btn').addEventListener('click', submitVotes);
+
+let visibleCardIndex = 0;
+
+function updateScrollMeter() {
+    const scrollPosition = window.pageYOffset;
+    const documentHeight = document.documentElement.scrollHeight;
+    const windowHeight = window.innerHeight;
+    const scrollableDistance = documentHeight - windowHeight;
+    
+    const scrollPercentage = Math.min(100, Math.round((scrollPosition / scrollableDistance) * 100));
+    
+    const scrollMeter = document.getElementById('scroll-meter');
+    const scrollCount = document.getElementById('scroll-count');
+    
+    scrollMeter.value = scrollPercentage;
+}
+
+function updatePointsLeft() {
+    const pointsLeftElement = document.getElementById('points-left');
+    pointsLeftElement.textContent = maxPoints - totalPoints;
+}
+
+// Add these event listeners at the end of your script
+window.addEventListener('scroll', updateScrollMeter);
+window.addEventListener('resize', updateScrollMeter);
+
+// Modify the existing fetch call to include these new function calls
+fetch('/talks.json')
+    .then(response => response.json())
+    .then(data => {
+        talks = data;
+        shuffleArray(talks);
+        const container = document.getElementById('cards-container');
+        talks.forEach(talk => {
+            container.appendChild(createCard(talk));
+        });
+        updateScrollMeter();
+        updatePointsLeft();
+    });
