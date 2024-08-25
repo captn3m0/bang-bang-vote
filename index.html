@@ -17,7 +17,7 @@
     <h1>!!Con Syncwatch | 26th August | Underline Center</h1>
 
     <p>
-        You have a total of 11 (!!) points. Spread them among the talks that you'd like to see at the Syncwatch party.
+        You have a total of 11 (!!) points. Spread them among the talks that you'd like to see at the Syncwatch party. Please also remember to select your dietary preference before submitting the form.
     </p>
     </header>
     
@@ -25,11 +25,19 @@
 
     
     <form
-      name="submit"
+      name="submit" 
       action="success.html"
       method="POST"
       data-netlify="true"
     >
+        <label for=diet>Diet Preference</label>
+
+        <select name="diet">
+          <option disabled="disabled" selected="selected">Please Choose</option>
+          <option>Vegetarian</option>
+          <option>Non-Vegetarian</option>
+        </select>
+
         <button id="submit-btn" disabled>Submit Votes</button>
         <input type="hidden" name="data" id="submit-data" />
     </form>
@@ -43,10 +51,8 @@
         </div>
     </div>
 
-    <div id="scroll-meter-container">
+    <div id="x-container">
         <meter id="scroll-meter" min="0" max="100" value="0"></meter>
-    </div>
-    <div id="points-left-container">
         <span id="points-left">11</span>
     </div>
 
