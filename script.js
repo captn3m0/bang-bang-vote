@@ -97,18 +97,6 @@ function getSubmitData() {
     return JSON.stringify(votes);
 }
 
-fetch('/talks.json')
-    .then(response => response.json())
-    .then(data => {
-        talks = data;
-        shuffleArray(talks);
-        const container = document.getElementById('cards-container');
-        talks.forEach(talk => {
-            container.appendChild(createCard(talk));
-        });
-    });
-
-
 let visibleCardIndex = 0;
 
 function updateScrollMeter() {
